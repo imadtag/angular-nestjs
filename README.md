@@ -1,5 +1,4 @@
 # angular-nestjs
-projet avec angular et nestjs
 
 Projet Angular et NestJs
 
