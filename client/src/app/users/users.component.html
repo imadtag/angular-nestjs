@@ -1,0 +1,42 @@
+<div class="container">
+  <h1>Add User</h1>
+  <form [formGroup]="addUserForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input id="name" name="name" type="text" class="form-control" formControlName="n">
+      </div>
+      <div class="alert alert-danger"
+      *ngIf="addUserForm.controls['n'].touched && addUserForm.controls['n'].invalid">
+        <div *ngIf="addUserForm.controls['n'].errors.required" >Champs requis</div>
+        <div *ngIf="addUserForm.controls['n'].errors.minlength" >Minimum 6 caratères</div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input id="email" type="text" class="form-control" formControlName="e">
+      </div>
+      <button class="btn btn-outline-primary" [disabled]="addUserForm.invalid">Ajouter</button>
+    </form><br />
+
+  <h1>Users List</h1>
+  <table class="table table-striped">
+    <tr>
+      <th>ID</th>
+      <th>NAME</th>
+      <th>EMAIL</th>
+      <th>UPDATE</th>
+      <th>DELETE</th>
+    </tr>
+    <tr *ngFor="let user of users">
+      <td>{{ user.id}}</td>
+      <td>{{ user.name}}</td>
+      <td>{{ user.email}}</td>
+      <td><button class="btn btn-outline-primary">Update</button></td>
+      <td>
+          <form [formGroup]="deleteUserForm" (ngSubmit)="onSubmitDelete()">
+            <input id="iduse" type="hidden" value="{{user.id}}" class="form-control" formControlName="idu">
+            <button class="btn btn-outline-danger">Delete</button>
+          </form>
+      </td>
+    </tr>
+  </table>
+</div>
